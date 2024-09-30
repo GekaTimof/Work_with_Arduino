@@ -3,8 +3,8 @@
 const int PINS_COUNT = 2;
 const int PIN_NUMS[PINS_COUNT] = {2, 3};
 const int ANALOG_PIN_NUMS[PINS_COUNT] = {2, 3};
+const int ERROR = 10;
 
-const int ERROR = 20;
 const int get_data_interval = 500;
 
 void setup() {
@@ -28,6 +28,17 @@ void loop() {
   // remembers the number of last light turned on
   static int light_togle = -1;
 
+  // values to culculate errors (left - LEFT_ERROR)
+  static int maxLeft = 0;
+  static int maxRight = 0;
+  int LEFT_ERROR = maxLeft - maxRight;
+  if (maxLeft > maxRight){
+    LEFT_ERROR += ERROR;
+  } else {
+    LEFT_ERROR -= ERROR;
+  }
+
+
   // get analog pins values periodically 
   if (currentMillis - previousMillis >= get_data_interval){
     previousMillis = currentMillis;
@@ -36,15 +47,33 @@ void loop() {
     int maxId = 0;
     for (int i = 0; i < PINS_COUNT; i++){
       ANALOG_PIN_VALUES[i] = analogRead(ANALOG_PIN_NUMS[i]);
-      // get max value
-      if (ANALOG_PIN_VALUES[i] > max){
-        // max = ANALOG_PIN_VALUES[i];
-        maxId = i;
-      }
+      Serial.print("ANALOG_PIN (");
+      Serial.print(i, DEC);
+      Serial.print(") = ");
+      Serial.print(ANALOG_PIN_VALUES[i], DEC);
+      Serial.print(" ");
+    }
+    Serial.println();
+
+    // get max left value
+    if (ANALOG_PIN_VALUES[0] > maxLeft){
+      maxLeft = ANALOG_PIN_VALUES[0];
+    }
+
+    // get max right value
+    if (ANALOG_PIN_VALUES[0] > maxRight){
+      maxRight = ANALOG_PIN_VALUES[0];
+    }
+
+    // Chose destination
+    if (ANALOG_PIN_VALUES[0] - LEFT_ERROR > ANALOG_PIN_VALUES[1]){
+      maxId = 0;
+    }else{
+      maxId = 1;
     }
 
     // check finishing (value close to max and close to each other)
-    if (abs(ANALOG_PIN_VALUES[0] - ANALOG_PIN_VALUES[1]) <= ERROR){
+    if (abs(ANALOG_PIN_VALUES[0] - LEFT_ERROR - ANALOG_PIN_VALUES[1]) <= 2 * ERROR){
        for (int i = 0; i < PINS_COUNT; i++){
         digitalWrite(PIN_NUMS[i], HIGH);
        }
@@ -65,9 +94,5 @@ void loop() {
         light_togle = -1;
       }
     }
-    // // check max value 
-    // if (max > MAX){
-    //   MAX = max;
-    // }
   }
 }
