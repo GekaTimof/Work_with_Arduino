@@ -1,1 +1,15 @@
-link -
+link to Circuit diagram - 
+link to no Circuit diagram - 
+link to demonstration - 
+
+When you turn off the circuit, it will work automatically.
+
+You can switch it to manual mode by sending command "t2", 
+
+Then you can use command "1" to turn on the green light 
+and 
+command "2" to turn on the red light. 
+
+The scheme for returning to automatic mode after 1 minute 
+or 
+after receiving a command is “t1”.
