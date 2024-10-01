@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22b9fd9a-6707-4e12-b91f-8e88fc0c64c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.ditignor" beforeDir="false" afterPath="$PROJECT_DIR$/.ditignor" afterDir="false" />
+    <list default="true" id="bac9451b-d0ff-4541-8f01-cf7f2cf119a7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.ditignor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Response_ccript_led/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Response_ccript_led/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,20 +18,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2mpXlaAP7wXSHqoQBbffBxMJMkB" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2mq4p1Spzilgb65KEhEDJWavtCa" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/evgeniy/Arduino/Work_with_Arduino/Two_devices_communication/Communication"
+    "git-widget-placeholder": "main"
   }
 }]]></component>
   <component name="RunManager">
@@ -65,11 +67,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="22b9fd9a-6707-4e12-b91f-8e88fc0c64c0" name="Changes" comment="" />
-      <created>1727774642882</created>
+      <changelist id="bac9451b-d0ff-4541-8f01-cf7f2cf119a7" name="Changes" comment="" />
+      <created>1727790951883</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1727774642882</updated>
+      <updated>1727790951883</updated>
     </task>
     <servers />
   </component>

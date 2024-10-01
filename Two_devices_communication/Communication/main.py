@@ -38,4 +38,3 @@ while True:
         else:
             resp = send_command('d', responses['d'], connection=connection_led)
         print(resp)
-
