@@ -2,7 +2,7 @@
 This is repository for all my projects with Arduino 
 
 ## Traffic_light
-Traffic_light - this directory project contains circuit and script for light sensor 
+Traffic_light - this directory project contains circuit and script for traffic light
 
 Traffic_light/src - this directory contains script all project scripts 
 
