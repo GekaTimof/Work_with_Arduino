@@ -36,8 +36,8 @@ void change_control_type(){
 }
 
 void loop() {
-    // hand togle
-    static int hand_togle = -1;
+  // hand togle
+  static int hand_togle = -1;
 
   String buf = "";
   if (Serial.available() > 0) {
