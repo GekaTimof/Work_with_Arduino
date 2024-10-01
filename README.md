@@ -18,3 +18,20 @@ Light_sensor/src - this directory contains script all project scripts
 Light_sensor/src/main.cpp - this is main project script
 
 Light_sensor/README - this file contain project discription, links to circuit diagram and link to demonstration video
+
+## Two_devices_communication
+Two_devices_communication - this directory project contains circuit and script for light sensor 
+
+Two_devices_communication/Communication/ - this directory contains scripts that allow devices to communicate 
+
+Two_devices_communication/Communication/main.py - this is main sctipt that allows devices to communicate 
+
+Two_devices_communication/Response_scripts_photo/src - this directory contains scripts that get light value and send it to Communicator
+
+Two_devices_communication/Response_scripts_photo/src/main.cpp - this is main scripts that gets light value and send it to Communicator
+
+Two_devices_communication/Response_ccript_led/src - this directory contains scripts that turn light depend on getted command
+
+Two_devices_communication/Response_ccript_led/src/main.cpp - this is main scripts that turns light depend on getted command
+
+Two_devices_communication/README - this file contain project discription, links to circuit diagram and link to demonstration video
