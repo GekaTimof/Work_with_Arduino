@@ -9,7 +9,7 @@ responses = {'d': 7, # resp -> "led off"
              'u': 6, # resp ->"led on"
              'p': 4} # resp -> [0:1023], fix size - zero fill to left side
 
-port_photo = '/dev/ttyUSB0'
+port_photo = '/dev/ttyUSB1'
 port_led = '/dev/ttyUSB0'
 connection_photo = serial.Serial(port_photo, baudrate=9600, timeout=2)
 connection_led = serial.Serial(port_led, baudrate=9600, timeout=2)
@@ -26,7 +26,7 @@ def send_command(cmd: str, response_len: int, connection: serial.Serial):
 
 
 while True:
-    time.sleep(1)
+    #time.sleep(1)
     # get data from sensor
     photo_val_resp: str = send_command(cmd='p', response_len=responses['p'], connection=connection_photo)
     #photo_val_resp = randint(0,1023)
