@@ -7,7 +7,7 @@ import serial
 
 responses = {'d': 7, # resp -> "led off"
              'u': 6, # resp ->"led on"
-             'p': 3} # resp -> [0:1023], fix size - zero fill to left side
+             'p': 3} # resp -> [0:255], fix size - zero fill to left side
 
 port_photo = '/dev/ttyUSB1'
 port_led = '/dev/ttyUSB0'
