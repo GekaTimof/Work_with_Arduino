@@ -9,7 +9,7 @@
 
 
 ## Description of how the circuit works
-after switching on, the circuit will work automatically.
+After switching on, the circuit will work automatically.
 
 The light turn on when an unforgettable light appears on the sensor.
 
