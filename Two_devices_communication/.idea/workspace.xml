@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="322ccb8e-7ac7-4818-af39-c09a37671a3f" name="Changes" comment="" />
+    <list default="true" id="322ccb8e-7ac7-4818-af39-c09a37671a3f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Two_devices_communication_MQTT/Communication/Communication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Two_devices_communication_MQTT/Communication/Publisher.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Two_devices_communication_MQTT/Communication/Publisher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Two_devices_communication_MQTT/Communication/Subscriber.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Two_devices_communication_MQTT/Communication/Subscriber.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +18,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2n9PyexK8lQ30GAyO3I0byINnQL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,7 +31,7 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/evgeniy/Arduino/Work_with_Arduino"
+    "last_opened_file_path": "/home/evgeniy/Arduino/Work_with_Arduino/Two_devices_communication"
   }
 }]]></component>
   <component name="SharedIndexes">
