@@ -34,8 +34,12 @@ print("Publishing")
 # send data 100 times
 for i in range(100):
     # get data to send
-    #state = "on" if randint(0, 1) else "off"
-    state = connection.get_photo_data()
+    state_arr = connection.get_array_photo_data()
+    if state_arr == 0:
+        time.sleep(0.5)
+        continue
+
+    state = int(sum(state_arr) / len(state_arr))
     print(f"state - {state}")
 
     if bool(state):
@@ -44,7 +48,8 @@ for i in range(100):
 
     # wait before nex sending
     print()
-    time.sleep(2)
+    time.sleep(0.1)
+
 
 # stop sending data
 client.disconnect()

@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bac9451b-d0ff-4541-8f01-cf7f2cf119a7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Communication.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Communication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Publisher.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Publisher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Subscriber.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Subscriber.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Response_scripts_photo/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Response_scripts_photo/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,13 +29,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/evgeniy/Arduino/Work_with_Arduino/Two_devices_communication/Communication"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Communication" />

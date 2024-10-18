@@ -38,7 +38,7 @@ client.on_message=on_massage
 
 # start getting data loop
 print("Connection to broker - ", broker)
-client.connect(broker)
+print(client.connect(broker))
 client.loop_start()
 print("Subscribing")
 
