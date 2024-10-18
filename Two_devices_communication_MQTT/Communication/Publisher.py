@@ -33,20 +33,24 @@ print("Publishing")
 
 # send data 100 times
 for i in range(100):
-    # get data to send
+    # get array of data to send
     state_arr = connection.get_array_photo_data()
-    if state_arr == 0:
-        time.sleep(0.5)
-        continue
+    if state_arr:
 
-    state = int(sum(state_arr) / len(state_arr))
-    print(f"state - {state}")
+        average_state = int(sum(state_arr) / len(state_arr))
+        print(f"state_arr - {state_arr}")
+        print(f"average_state - {average_state}")
 
-    if bool(state):
-        # send data
-        client.publish(f"home/{pub_id}/room/light", state)
+        state = state_arr[0]
+        print(f"state - {state}")
 
-    # wait before nex sending
+        # send state data
+        client.publish(f"lab/{pub_id}/photo/instant", state)
+
+        # send state data array
+        client.publish(f"lab/{pub_id}/photo/average", state)
+
+    # wait before next sending
     print()
     time.sleep(0.1)
 

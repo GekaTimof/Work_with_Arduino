@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bac9451b-d0ff-4541-8f01-cf7f2cf119a7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Communication.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Communication.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Publisher.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Publisher.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Subscriber.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Communication/Subscriber.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Response_scripts_photo/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Two_devices_communication_MQTT/Response_scripts_photo/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

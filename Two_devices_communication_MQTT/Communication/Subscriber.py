@@ -11,7 +11,7 @@ connection = Connect(port='/dev/ttyUSB0')
 broker = "broker.emqx.io"
 
 # set publisher id
-pub_id = "a879fd15cf"
+pub_id = "8ae28385b2"
 # check publisher id
 if not pub_id:
     raise RuntimeError("Publisher id is not defined")
@@ -28,6 +28,7 @@ def on_massage(client, userdata, message):
     print("received message = ", data)
     connection.send_led_signal(photo_val=data)
     print()
+
 # set client and git him his id (sub_id)
 client = mqtt_client.Client(
     mqtt_client.CallbackAPIVersion.VERSION2,
@@ -42,8 +43,11 @@ print(client.connect(broker))
 client.loop_start()
 print("Subscribing")
 
-# subscribing for publisher
-client.subscribe(f"home/{pub_id}/room/light")
+# subscribing for publisher state data
+# client.subscribe(f"lab/{pub_id}/photo/instant")
+
+# subscribing for publisher state data average
+client.subscribe(f"lab/{pub_id}/photo/average")
 
 # stop listening after time
 time.sleep(1800)

@@ -27,10 +27,10 @@ class Connect:
         photo_val_resp: str = self.send_command(cmd='p', response_len=self.responses['p'], connection=self.connection)
         if photo_val_resp:
             photo_val = int(photo_val_resp) * 4
-            print(f"GET photo value - {photo_val}")
+            # print(f"GET photo value - {photo_val}")
             return photo_val
         else:
-            print(f"NO photo value")
+            # print(f"NO photo value")
             return 0
 
 
@@ -42,11 +42,10 @@ class Connect:
         photo_val_resp_all: str = self.send_command(cmd='a', response_len=self.responses['a'], connection=self.connection)
         if photo_val_resp_all:
             photo_val_resp = self.split_string(s=photo_val_resp_all, l=int(self.responses['a']/num))
-            print(photo_val_resp)
-            print(f"GET photo values - {photo_val_resp}")
+            # print(f"GET photo values - {photo_val_resp}")
             return photo_val_resp
         else:
-            print(f"NO photo value")
+            # print(f"NO photo value")
             return 0
 
 
