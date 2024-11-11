@@ -18,9 +18,4 @@ At startup Subscriber.py A graph will be displayed showing the current illuminat
 
 The 3 pin light bulb turns on when the light level starts to drop
 
-
-The backlight turns off when there is not enough light. (process values)
-
-The 3 pin light bulb turns on when the light level starts to drop
-
 The 4-pin light bulb turns on when the light level falls below the average between maximum and minimum illumination
