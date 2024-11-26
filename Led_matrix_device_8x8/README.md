@@ -4,4 +4,5 @@
 ## Description of how the circuit works
 After switching on, the circuit will work automatically.
 
-The matrix will show image from bollean array
+The matrix will show images from bollean arrays,
+it will be simple animation of a spinning object
