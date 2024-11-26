@@ -64,3 +64,11 @@ Two_devices_communication_MQTT/Communication/Subscriber.py ) is a script that re
 [Two_devices_communication_MQTT/Response_ccript_led/src/main.cpp](Two_devices_communication/Response_ccript_led/src/main.cpp) - this is main scripts that turns light depend on getted command
 
 [Two_devices_communication_MQTT/README](Two_devices_communication/README)- this file contain project discription, links to circuit diagram and link to demonstration video
+
+## Led_matrix
+[Led_matrix](Led_matrix) - this directory project contains circuit and script for led matrix
+
+[Led_matrix/src/main.cpp](Led_matrix/src/main.cpp) - this is main scripts that contain all project logic 
+
+
+
