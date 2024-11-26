@@ -37,14 +37,59 @@ void set_picture(int img_height, int img_widght, int img[IMG_HEIGHT][IMG_WIDTH])
   // return true;
 }
 
+const int test_interval = 250;
 void loop() {
-  static int IMG[IMG_HEIGHT][IMG_WIDTH] = {
-    {0,1,0,0,1,0},
-    {1,1,1,1,1,1},
-    {1,1,1,1,1,1},
-    {1,1,1,1,1,1},
-    {0,1,1,1,1,0},
+  static int IMG_1[IMG_HEIGHT][IMG_WIDTH] = {
+    {1,1,0,0,0,0},
+    {1,1,1,0,0,0},
+    {0,1,1,1,0,0},
+    {0,0,1,1,1,0},
+    {0,0,0,1,1,1},
+    {0,0,0,0,1,1}};
+
+  static int IMG_2[IMG_HEIGHT][IMG_WIDTH] = {
+    {0,0,1,1,0,0},
+    {0,0,1,1,0,0},
+    {0,0,1,1,0,0},
+    {0,0,1,1,0,0},
+    {0,0,1,1,0,0},
     {0,0,1,1,0,0}};
+
+  static int IMG_3[IMG_HEIGHT][IMG_WIDTH] = {
+    {0,0,0,0,1,1},
+    {0,0,0,1,1,1},
+    {0,0,1,1,1,0},
+    {0,1,1,1,0,0},
+    {1,1,1,0,0,0},
+    {1,1,0,0,0,0}};
+
+  static int IMG_4[IMG_HEIGHT][IMG_WIDTH] = {
+    {0,0,0,0,0,0},
+    {0,0,0,0,0,0},
+    {1,1,1,1,1,1},
+    {1,1,1,1,1,1},
+    {0,0,0,0,0,0},
+    {0,0,0,0,0,0}};
+
   
-  set_picture(IMG_HEIGHT, IMG_WIDTH, IMG);
+  // contain previous time
+  static unsigned long previousMillis = 0; 
+  // current time
+  unsigned long currentMillis = millis();
+
+
+  if (currentMillis - previousMillis < test_interval){
+    set_picture(IMG_HEIGHT, IMG_WIDTH, IMG_1);
+  }else 
+    if (currentMillis - previousMillis < 2*test_interval){
+    set_picture(IMG_HEIGHT, IMG_WIDTH, IMG_2);
+  }else
+    if (currentMillis - previousMillis < 3*test_interval){
+    set_picture(IMG_HEIGHT, IMG_WIDTH, IMG_3);
+  }else
+    if (currentMillis - previousMillis < 4*test_interval){
+    set_picture(IMG_HEIGHT, IMG_WIDTH, IMG_4);
+  }else{
+    previousMillis = currentMillis;
+  }
 }
