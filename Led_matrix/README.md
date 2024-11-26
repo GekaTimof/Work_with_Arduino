@@ -1,7 +1,7 @@
 ## Links
 [link to Circuit diagram](https://drive.google.com/file/d/1Jdpdh11MZ8Onm8UNS5f3IleqdwERDlza/view?usp=drive_link)
 
-[link to no Circuit diagram](https://drive.google.com/file/d/1Jdpdh11MZ8Onm8UNS5f3IleqdwERDlza/view?usp=drive_link)
+[link to no Circuit diagram](https://drive.google.com/file/d/18G8XMMfdmrlukjdjPdQMSnDDJ50QUN-j/view?usp=drive_link)
 
 [link to video demonstration](https://drive.google.com/file/d/10dhVAbncldaiY6VWjf4ezd60CbKhsV4H/view?usp=drive_link)
 
