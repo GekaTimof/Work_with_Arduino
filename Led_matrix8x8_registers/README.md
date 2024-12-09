@@ -1,5 +1,5 @@
 ## Links
-[link to video demonstration](https://drive.google.com/file/d/10zva7obr7ckAzVvODpOrvANwAX47uM6C/view?usp=sharing)
+[link to video demonstration](https://drive.google.com/file/d/119oPth7AkiA-YwSCKTjAY5BZqCLU_Sm4/view?usp=drive_link)
 
 ## Description of how the circuit works
 After switching on, the circuit will work automatically.
