@@ -15,6 +15,9 @@ char* mqtt_broker = "broker.emqx.io";
 const int mqtt_port = 1883;
 
 const String mqtt_topic = "Sensor/data";
+// String topic_str = id() + mqtt_topic; 
+String topic_str = mqtt_topic; 
+const char* topic = topic_str.c_str(); 
 
 const int led = 2;
 

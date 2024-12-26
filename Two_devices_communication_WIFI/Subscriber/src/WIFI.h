@@ -2,6 +2,7 @@
 #include <WiFiClient.h>
 #include <ESP8266WiFiMulti.h>
 
+
 ESP8266WiFiMulti wifiMulti;    
 WiFiClient wifiClient;
 
@@ -28,10 +29,15 @@ bool StartAPMode() {
 
 void StartCLIMode() {
   wifiMulti.addAP(ssidCLI, passwordCLI);
-  //it is possible to add more networks to connect
+  Serial.print("Connecting to wi-fi:");
+  
+  //wait for connect to wi-fi
   while(wifiMulti.run() != WL_CONNECTED) {
-       
+    delay(500);
+    Serial.println("wait for connection");
   }
+   Serial.println("");
+   Serial.println("Connection success");
 }
 
 void WIFI_init(bool mode_ap) {
@@ -42,6 +48,6 @@ void WIFI_init(bool mode_ap) {
       StartCLIMode();
       ip = WiFi.localIP().toString();
     }
-    Serial.println("IP address: ");
+    Serial.print("IP address: - ");
     Serial.println(ip);  
 }

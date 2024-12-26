@@ -7,8 +7,7 @@
 
 
 ESP8266WebServer server(80);    
-String topic_str = id() + mqtt_topic; 
-const char* topic = topic_str.c_str(); 
+
 
 
 // HTML form to switch led (send us ti "/LED")
@@ -49,7 +48,7 @@ void server_init() {
 }
 
 void setup(void){
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(led, OUTPUT);
   digitalWrite(2, LOW);
 
@@ -67,39 +66,60 @@ void setup(void){
   
   mqtt_cli.publish(topic, "create topic");
 
-  // HTTPClient httpClient;
-  // // Connect to server and try to send the message
-  // httpClient.begin(topic, "http://copift.ru:5000/refresh");
+  //отправка сгенерированного топика на сервер
+  HTTPClient httpClient;
+  // Connect to server and try to send the message
+  httpClient.begin(wifiClient,"http://copift.ru:5000/refresh");
+
+  httpClient.addHeader("Content-Type", "application/json");
+  int httpResponseCode = httpClient.POST("{\"message\":\"" + (String)topic +"\"}");
+
+  String resultInfo;
+  if (httpResponseCode > 0){
+        // Serial.println(httpClient.getString());
+        resultInfo = "Success, HTTP Response Code: " + (String)httpResponseCode ;
+    }
+    else{
+        resultInfo = "Error, HTTP Response Code: " + (String)httpResponseCode ;
+    }
+    httpClient.end();
 
   // mqtt_cli.subscribe("esp8266/command");
   Serial.println("Finish connecting");
 }
 
-void loop(){
-  // server.handleClient();                   
-  // mqtt_cli.loop();
 
-  Serial1.println("=====");
+void loop() {
+    // Проверка подключения к Wi-Fi
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("Wi-Fi disconnected. Reconnecting...");
+        WIFI_init(false); // Переподключаемся к Wi-Fi
+    }
 
-  static long previousMillis = 0; 
-  long currentMillis = millis();
+    // Проверка подключения к MQTT брокеру
+    if (!mqtt_cli.connected()) {
+        Serial.println("MQTT disconnected. Reconnecting...");
+        MQTT_init(); // Переподключаемся к брокеру
+    }
 
-  delay(100);
-  Serial1.println("" + (currentMillis - previousMillis));
+    // Запускаем MQTT-клиент (очень важно для получения сообщений)
+    mqtt_cli.loop();
 
-  if (currentMillis - previousMillis >= stepMillis) {
-    previousMillis = currentMillis; 
+    // Ваш основной код обработки сенсора и отправки данных
+    static long previousMillis = 0; 
+    long currentMillis = millis();
 
-    // get data from sensor
-    int data = analogRead(A0);
-    char payload[4]; 
-    itoa(data, payload, 10);
-    
-    // Sending data to topic
-    mqtt_cli.publish(topic, payload);
+    if (currentMillis - previousMillis >= stepMillis) {
+        previousMillis = currentMillis; 
 
-    Serial1.println("Send - " + String(payload) + " to topic - " + topic);
-  }
+        // Получаем данные с датчика освещенности
+        int data = analogRead(A0);
+        char payload[4]; 
+        itoa(data, payload, 10);
+        
+        // Отправляем данные в топик через MQTT
+        mqtt_cli.publish(topic, payload);
 
-
+        Serial1.println("Send - " + String(payload) + " to topic - " + topic);
+    }
 }
