@@ -7,7 +7,9 @@
 
 
 ESP8266WebServer server(80);    
-
+String topic_str = id() + mqtt_topic; 
+// String topic_str = mqtt_topic; 
+const char* topic = topic_str.c_str(); 
 
 
 // HTML form to switch led (send us ti "/LED")
@@ -62,7 +64,7 @@ void setup(void){
   server_init();
 
   // make mqtt connection (create topic)
-  MQTT_init();
+  MQTT_init(topic);
   
   mqtt_cli.publish(topic, "create topic");
 
@@ -99,7 +101,7 @@ void loop() {
     // Проверка подключения к MQTT брокеру
     if (!mqtt_cli.connected()) {
         Serial.println("MQTT disconnected. Reconnecting...");
-        MQTT_init(); // Переподключаемся к брокеру
+        MQTT_init(topic); // Переподключаемся к брокеру
     }
 
     // Запускаем MQTT-клиент (очень важно для получения сообщений)

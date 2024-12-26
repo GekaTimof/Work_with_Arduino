@@ -26,7 +26,7 @@ void callback(char *topic, byte *payload, unsigned int length) {
 }
 
 
-void MQTT_init() {
+void MQTT_init(const char* topic) {
     Serial.println("Connecting to broker:");
     mqtt_cli.setServer(mqtt_broker, mqtt_port);
     mqtt_cli.setCallback(callback);

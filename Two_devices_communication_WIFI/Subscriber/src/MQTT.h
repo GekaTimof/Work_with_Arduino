@@ -10,14 +10,14 @@ void callback(char *topic, byte *payload, unsigned int length) {
     Serial.print("Message:");
     String message;
     for (int i = 0; i < length; i++) {
-        Serial.print((char)payload[i]);
+        // Serial.print((char)payload[i]);
         message+=(char)payload[i];
     }
     int res=message.toInt();
     Serial.println(res);
-    Serial.println("--------------------");
+    Serial.println("-------------------");
   
-    if (res < 100) {
+    if (res < 500) {
       digitalWrite(2, HIGH); 
     }
     else {
@@ -26,22 +26,35 @@ void callback(char *topic, byte *payload, unsigned int length) {
 }
 
 
-void MQTT_init(){
-  Serial.println("Connecting to broker:");
-  mqtt_cli.setServer(mqtt_broker, mqtt_port);
-  mqtt_cli.setCallback(callback);
+void MQTT_init(const char* topic) {
+    Serial.println("Connecting to broker:");
+    mqtt_cli.setServer(mqtt_broker, mqtt_port);
+    mqtt_cli.setCallback(callback);
 
-  while (!mqtt_cli.connected()) {
-      String client_id = "esp8266-" + String(WiFi.macAddress());
-      Serial.print("The client " + client_id);
+    // Логика подключения с ограничением попыток
+    String client_id = "esp8266-" + String(WiFi.macAddress());
+    int attempt = 0;
 
-      Serial.println(" connects to the public mqtt broker\n");
-      if (mqtt_cli.connect(client_id.c_str())){
-          Serial.println("MQTT Connected");
-      } else {
-          Serial.print("failed with state ");
-          Serial.println(mqtt_cli.state());
-          delay(2000);
-      }
-  }  
+    while (!mqtt_cli.connected() && attempt < 5) {
+        attempt++;
+        Serial.print("Attempt ");
+        Serial.print(attempt);
+        Serial.println(": Connecting to MQTT broker...");
+
+        if (mqtt_cli.connect(client_id.c_str())) {
+            Serial.println("MQTT Connected");
+
+            // Подписываемся на топик после успешного подключения
+            mqtt_cli.subscribe(topic);
+        } else {
+            Serial.print("Failed to connect. State: ");
+            Serial.println(mqtt_cli.state());
+            delay(2000); // Задержка перед новой попыткой
+        }
+    }
+
+    if (!mqtt_cli.connected()) {
+        Serial.println("Failed to connect to MQTT broker after 5 attempts. Restarting...");
+        ESP.restart(); // Перезагружаем устройство
+    }
 }

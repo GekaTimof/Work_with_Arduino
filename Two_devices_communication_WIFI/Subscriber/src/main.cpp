@@ -7,10 +7,32 @@
 
 
 ESP8266WebServer server(80);    
-// String topic_str = id() + mqtt_topic; 
-String topic_str = mqtt_topic; 
-const char* topic = topic_str.c_str(); 
 
+String topic_str = "";
+
+void getTopicFromServer() {
+  HTTPClient httpClient;
+  httpClient.begin(wifiClient, "http://copift.ru:5000/get_id");
+  
+  // Send HTTP GET request
+  int httpResponseCode = httpClient.GET();
+
+  if (httpResponseCode > 0) {
+    Serial.print("HTTP Response code: ");
+    Serial.println(httpResponseCode);
+    String payload = httpClient.getString();
+    Serial.println(payload);
+    int a=payload.indexOf(":")+2;
+    int b=payload.indexOf('"',a);
+    topic_str=payload.substring(a,b);
+
+    Serial.println("Parsed topic: " + topic_str);
+  }else{
+    Serial.print("Error on HTTP request. Code: ");
+    Serial.println(httpResponseCode);
+  }
+  httpClient.end();
+}
 
 // HTML form to switch led (send us ti "/LED")
 void handleRoot() {                         
@@ -50,9 +72,8 @@ void server_init() {
 }
 
 void setup(void){
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(led, OUTPUT);
-  digitalWrite(2, LOW);
 
   Serial.println("Start connecting");
   
@@ -63,44 +84,37 @@ void setup(void){
   // set web-server
   server_init();
 
+  // get topic
+  getTopicFromServer();
+
   // make mqtt connection (create topic)
-  MQTT_init();
+  const char* topic = topic_str.c_str(); 
+  MQTT_init(topic);
   
-  mqtt_cli.publish(topic, "create topic");
-
-  // HTTPClient httpClient;
-  // // Connect to server and try to send the message
-  // httpClient.begin(topic, "http://copift.ru:5000/refresh");
-
-  // mqtt_cli.subscribe("esp8266/command");
   Serial.println("Finish connecting");
 }
 
-void loop(){
-  // server.handleClient();                   
-  // mqtt_cli.loop();
 
-  Serial1.println("=====");
+void loop() {
+    // Проверка подключения к Wi-Fi
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("Wi-Fi disconnected. Reconnecting...");
+        WIFI_init(false); // Переподключаемся к Wi-Fi
+    }
 
-  static long previousMillis = 0; 
-  long currentMillis = millis();
+    // Проверка подключения к MQTT брокеру
+    if (!mqtt_cli.connected()) {
+        Serial.println("MQTT disconnected. Reconnecting...");
+        const char* topic = topic_str.c_str(); 
+        MQTT_init(topic); // Переподключаемся к брокеру
+    }
 
-  delay(100);
-  Serial1.println("" + (currentMillis - previousMillis));
+    if (topic_str.isEmpty()) {
+        mqtt_cli.subscribe(topic_str.c_str());
+        Serial.println("Resubscribed to topic.");
+    }
 
-  if (currentMillis - previousMillis >= stepMillis) {
-    previousMillis = currentMillis; 
-
-    // get data from sensor
-    int data = analogRead(A0);
-    char payload[4]; 
-    itoa(data, payload, 10);
-    
-    // Sending data to topic
-    mqtt_cli.publish(topic, payload);
-
-    Serial1.println("Send - " + String(payload) + " to topic - " + topic);
-  }
-
+    // Запускаем MQTT-клиент (очень важно для получения сообщений)
+    mqtt_cli.loop();
 
 }
