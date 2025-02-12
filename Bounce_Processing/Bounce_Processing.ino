@@ -69,7 +69,7 @@ void process_button_click() {
     report_to_user = true;
     hold_time = 0;
 
-  button_pressed = false;
+    button_pressed = false;
     last_time_check = press_time;
   }
   
