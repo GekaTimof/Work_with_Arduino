@@ -18,9 +18,11 @@ void loop() {
       Serial.println("Press candidate");
     report_to_user = false;
   }
-  // debounce and other code here
-  // if real press -> press_count++;
-  // check releaased only after pressed
+  
+  if()
+
+
+  delay(1);
 }
 void process_button_click() {
   if (pressed_candidate == false) {
@@ -29,4 +31,5 @@ void process_button_click() {
     report_to_user = true;
     hold_time = 0;
   }
+  
 }
