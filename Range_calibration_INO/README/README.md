@@ -1,5 +1,5 @@
 ## Links
-[link to video demonstration]([https://drive.google.com/file/d/1-0jK0vkm1DKtWruDE4SyW8tnnAZGAGD6/view?usp=sharing](https://drive.google.com/file/d/11cU3mg6ImIC6wveavK5SprHsKHRBL6vk/view?usp=drive_link))
+[link to video demonstration](https://drive.google.com/file/d/11cU3mg6ImIC6wveavK5SprHsKHRBL6vk/view?usp=drive_link)
 
 ## Description of how the circuit works
 When you run the script, a percentage scan counter will appear on the screen, 
