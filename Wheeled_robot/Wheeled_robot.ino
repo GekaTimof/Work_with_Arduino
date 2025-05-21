@@ -67,10 +67,10 @@ void stop(){
 
 
 void loop() {
-  go_forvard(255);
+  // go_forvard(255);
   // go_back(255);
-  // turn_right_onspot(255);
-
+  turn_right_onspot(255);
+  
 }
 
 
