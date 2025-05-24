@@ -16,21 +16,21 @@ SoftwareSerial BTSerial(10, 11); // tx 10, rx 11
 float distance_front = 0.0;
 float distance_right = 0.0;
 int front_min = 30; 
-int right_min = 20;
-int right_max = 30;
-int step_time = 10;
+int right_min = 30;
+int right_max = 70;
+int step_time = 1;
 
 int state = 1;
 int counter = 0;
 
-int left_speed = 220;
-int right_speed = 220;
+int left_speed = 160;
+int right_speed = 160;
 
-bool calibration_mode = true;
+bool calibration_mode = false;
 bool move_mode = false;
 bool state_mode = false;
 bool wheels_mode = false;
-char wheel = "l";
+String wheel = "l";
 
 const int num_moves = 4;
 bool move_dirs[num_moves][2] = {
@@ -173,96 +173,134 @@ void loop() {
       Serial.println(idx);
 
       // switch to left wheel
-      if (idx == 2) wheel = "l";
+      if (idx == 2) {
+        wheel = "l";
+      }
       // switch to right wheel
-      if (idx == 3) wheel = "r";
-      // faster
-      if (idx == 0){
-        if (wheel == "l") left_speed += 10;
-        if (wheel == "r") right_speed += 10;
+      if (idx == 3) {
+        wheel = "r";
       }
-      // slower
-      if (idx == 1){
-        if (wheel == "l") left_speed -= 10;
-        if (wheel == "r") right_speed -= 10;
+
+      if (idx >= 0 and idx < 2){
+        // faster
+        if (idx == 0){
+          if (wheel == "l") {
+            left_speed += 10;
+            if (left_speed > 260){
+              left_speed = 260;
+            }
+          }
+          if (wheel == "r") {
+            right_speed += 10;
+            if (right_speed > 260){
+              right_speed = 260;
+            }
+          }
+        }
+
+        // slower
+        if (idx == 1){
+          if (wheel == "l") {
+            left_speed -= 10;
+            if (left_speed < 100){
+              left_speed = 100;
+            }
+          }
+          if (wheel == "r") {
+            right_speed -= 10;
+            if (right_speed < 100){
+              right_speed = 100;
+            }
+          }
+        }
+        Serial.print("left: ");
+        Serial.println(left_speed);
+        Serial.print("right: ");
+        Serial.println(right_speed);
+
+        move_calibrated(toggle_phase[0], left_speed, right_speed);
+        delay(400);
+        stop();
       }
-      // move_calibrated(toggle_phase[0], left_speed, right_speed);
+    }
+  }
+  // mode to move as state machine
+  else if (state_mode) {
+    distance_front = getDistance(TRIG_FRONT_PIN, ECHO_FRONT_PIN);
+    distance_right = getDistance(TRIG_RIGHT_PIN, ECHO_RIGHT_PIN);
+    // Serial.print("right:");
+    // Serial.println(distance_right);
+    // Serial.print("front:");
+    // Serial.println(distance_front);
+
+    // to close to right
+    if (state == 1 and distance_front > front_min and distance_right < right_min){
+      move_calibrated(toggle_phase[2], left_speed, right_speed);
+      state = 2;
+      counter = 1;
+    }
+    else if (state == 2 and distance_right < right_min and counter % 3 == 0){
+      move_calibrated(toggle_phase[0], left_speed, right_speed);
+      counter += 1;
+    }
+    else if (state == 2 and distance_right < right_min and counter % 3 > 0){
+      move_calibrated(toggle_phase[2], left_speed, right_speed); 
+      counter += 1;
+    }
+    else if (state == 2 and distance_right >= right_min){
+      move_calibrated(toggle_phase[3], left_speed, right_speed);
+      state = 1;
+      counter = 0;
     }
 
-    // mode to move as state machine
-    else if (state_mode) {
-      distance_front = getDistance(TRIG_FRONT_PIN, ECHO_FRONT_PIN);
-      distance_right = getDistance(TRIG_RIGHT_PIN, ECHO_RIGHT_PIN);
-
-      // to close to right
-      if (state == 1 and distance_front > front_min and distance_right < right_min){
-        move_calibrated(toggle_phase[2], left_speed, right_speed);
-        state = 2;
-        counter = 1;
-      }
-      else if (state == 2 and distance_right < right_min and counter % 5 == 0){
-        move_calibrated(toggle_phase[0], left_speed, right_speed);
-        counter += 1;
-      }
-      else if (state == 2 and distance_right < right_min and counter % 5 > 0){
-        move_calibrated(toggle_phase[2], left_speed, right_speed); 
-        counter += 1;
-      }
-      else if (state == 2 and distance_right >= right_min){
-        move_calibrated(toggle_phase[3], left_speed, right_speed);
-        state = 1;
-        counter = 0;
-      }
-
-      // before wall 
-      else if (state == 1 and distance_front <= front_min){
-        move_calibrated(toggle_phase[2], left_speed, right_speed); 
-        state = 3;
-        counter = 1;
-      }
-      else if (state == 3 and distance_front <= front_min){
-        move_calibrated(toggle_phase[2], left_speed, right_speed); 
-        counter += 1;
-      }
-      else if (state == 3 and distance_front > front_min){
-        move_calibrated(toggle_phase[2], left_speed, right_speed); 
-        state = 1;
-        counter = 0;
-      }
-
-      // no wall on right
-      if (state == 1 and distance_front > front_min and distance_right > right_max){
-        move_calibrated(toggle_phase[3], left_speed, right_speed);
-        state = 4;
-        counter = 1;
-      }
-      else if (state == 4 and distance_right > right_max and counter % 5 == 0){
-        move_calibrated(toggle_phase[0], left_speed, right_speed);
-        counter += 1;
-      }
-      else if (state == 4 and distance_right > right_max and counter % 5 > 0){
-        move_calibrated(toggle_phase[3], left_speed, right_speed);
-        counter += 1;
-      }
-      else if (state == 4 and distance_right >= right_max){
-        move_calibrated(toggle_phase[2], left_speed, right_speed); 
-        state = 1;
-        counter = 0;
-      }
-
-
-      // all ok and we need to move forward
-      else if (state == 1){
-        move_calibrated(toggle_phase[0], left_speed, right_speed);
-      } 
-
-      // reset if we are stuck in cycle
-      if (counter >= 10){
-        state = 1;
-        counter = 0;
-      }
-      delay(step_time);
+    // before wall 
+    else if (state == 1 and distance_front <= front_min){
+      move_calibrated(toggle_phase[2], left_speed, right_speed); 
+      state = 3;
+      counter = 1;
     }
+    else if (state == 3 and distance_front <= front_min){
+      move_calibrated(toggle_phase[2], left_speed, right_speed); 
+      counter += 1;
+    }
+    else if (state == 3 and distance_front > front_min){
+      move_calibrated(toggle_phase[3], left_speed, right_speed); 
+      state = 1;
+      counter = 0;
+    }
+
+    // no wall on right
+    if (state == 1 and distance_front > front_min and distance_right > right_max){
+      move_calibrated(toggle_phase[3], left_speed, right_speed);
+      state = 4;
+      counter = 1;
+    }
+    else if (state == 4 and distance_right > right_max and counter % 3 == 0){
+      move_calibrated(toggle_phase[0], left_speed, right_speed);
+      counter += 1;
+    }
+    else if (state == 4 and distance_right > right_max and counter % 3 > 0){
+      move_calibrated(toggle_phase[3], left_speed, right_speed);
+      counter += 1;
+    }
+    else if (state == 4 and distance_right >= right_max){
+      move_calibrated(toggle_phase[2], left_speed, right_speed); 
+      state = 1;
+      counter = 0;
+    }
+
+
+    // all ok and we need to move forward
+    else if (state == 1){
+      move_calibrated(toggle_phase[0], left_speed, right_speed);
+    } 
+
+    // reset if we are stuck in cycle
+    if (counter >= 10){
+      state = 1;
+      counter = 0;
+    }
+    delay(step_time);
   }
 }
 // move_calibrated(toggle_phase[0], left_speed, right_speed);   ->  Front
